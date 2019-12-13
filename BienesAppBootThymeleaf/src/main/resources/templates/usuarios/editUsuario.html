@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/menu :: head"></head>
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+	<div class="container theme-showcase" role="main">
+		<div class="card bg-dark">
+			<h3 class="blog-title">
+				<span class="label label-success">Edición Usuario</span>
+
+			</h3>
+
+			<br>
+			<div class="panel panel-default">
+				<div class=" panel-body">
+
+					<form th:action="@{/usuarios/save}" th:object="${usuario}"
+						method="post">
+						<input type="hidden" th:field="*{id}" />
+						<div class="row">
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="perfil">PERFIL</label> <select 
+										id="perfil" name="perfil" class="form-control">
+										<option th:value="ESTANDAR" th:text="ESTANDAR"></option>
+										<option th:value="ADMINISTRADOR" th:text="ADMINISTRADOR"></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="activo">Estado</label> <select th:field="*{activo}"
+										id="activo" name="perfil" class="form-control">
+										<option th:value=1 th:text="Activo"></option>
+										<option th:value=0 th:text="Inactivo"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="cuenta">Cuenta</label> <input type="text"
+										class="form-control" th:field="*{cuenta}" name="cuenta"
+										required="required" autocomplete="off">
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label for="email">Email</label> <input type="email"
+										class="form-control" th:field="*{email}" id="email"
+										name="email" placeholder="Correo electrónico"
+										required="required" autocomplete="off"
+										pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/"
+										onKeyUp="javascript:validateMail('email')">
+								</div>
+							</div>
+						</div>
+						<div class="btn-toolbar" role="toolbar">
+							<div class="btn-group">
+								<input type="submit" title="Guardar" value="Guardar"
+									class="btn btn-primary" />
+							</div>
+
+							<div class="btn-group">
+								<a th:href="@{/usuarios/cancel}" class="btn btn-danger"
+									role="button" title="Cancelar">Cancelar</a>
+							</div>
+						</div>
+						<br>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<title>Control de Bienes Site | Bienvenido</title>
+<link th:href="@{/images/logouce.ico.ico}" type="image/x-icon"
+	rel="shortcut icon" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/bootstrap/css/theme.css}" />
+<link rel="stylesheet" th:href="@{/css/my-style.css}" />
+</head>
+
+<body>
+	<header th:fragment="header">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<sec:authorize access="isAnonymous()">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#navbar"
+							aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" th:href="@{/}">My Control Site</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+
+							<li><a th:href="@{/about}">Acerca <i
+									class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>
+							<li><a th:href="@{/formLogin}"><i class="fa fa-sign-in"
+									aria-hidden="true" style="color: blue"></i> Login</a></li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</sec:authorize>
+				<sec:authorize access="hasAnyAuthority('ADMINISTRADOR')">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#navbar"
+							aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" th:href="@{/admin/index}">My Control
+							Site | Administración</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a th:href="@{/bienes/indexPaginate}">Bienes</a></li>
+							<li><a th:href="@{/estaciones/indexPaginate}">Estaciones</a></li>
+							<li><a th:href="@{/asignaciones/indexPaginate}">Asignaciones</a></li>
+							<li><a th:href="@{/noticias/indexPaginate}">Notificaciones</a></li>
+							<li><a th:href="@{/banners/indexPaginate}">Banners</a></li>
+							<li><a th:href="@{/usuarios/indexPaginate}">Usuarios</a></li>
+							<li><a th:href="@{/admin/logout}"><i
+									class="fa fa-sign-out" aria-hidden="true" style="color: red"></i>
+									Salir</a></li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</sec:authorize>
+
+				<sec:authorize access="hasAnyAuthority('ESTANDAR')">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#navbar"
+							aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" th:href="@{/admin/index}">My Control
+							Site | Administración</a>
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a th:href="@{/noticias/indexPaginate}">Notificaciones</a></li>
+							<li><a th:href="@{/banners/indexPaginate}">Banners</a></li>
+							<li><a th:href="@{/admin/logout}"><i
+									class="fa fa-sign-out" aria-hidden="true" style="color: red"></i>
+									Salir</a></li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</sec:authorize>
+
+			</div>
+		</nav>
+		<div class="container">
+			<div class="alert alert-success" th:if="${mensaje != null}"
+				th:text="${mensaje}"></div>
+			<div class="alert alert-danger" th:if="${error != null}"
+				th:text="${error}"></div>
+			<div class="alert alert-warning" th:if="${alerta != null}"
+				th:text="${alerta}"></div>
+			<div class="alert alert-info" th:if="${info != null}"
+				th:text="${info}"></div>
+		</div>
+	</header>
+
+</body>
+</html>

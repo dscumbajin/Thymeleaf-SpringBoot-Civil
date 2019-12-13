@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="includes/menu :: head"></head>
+
+<body>
+	<header th:replace="includes/menu :: header "></header>
+	<div class="container theme-showcase" role="main">
+		<hr class="featurette-divider">
+		<div class="jumbotron center">
+			<h3>Administración del Sistema</h3>
+			<p style="text-transform: uppercase">
+				Bienvenido(a) <a class="glyphicon glyphicon-user"></a>
+				<sec:authentication property="principal.username" />
+			</p>
+		</div>
+
+	</div>
+	<!-- /container -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+</body>
+</html>

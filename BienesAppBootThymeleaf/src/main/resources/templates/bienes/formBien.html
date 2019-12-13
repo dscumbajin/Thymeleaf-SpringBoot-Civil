@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/menu :: head"></head>
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+	<div class="container theme-showcase" role="main">
+
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-success">Datos del Bien</span>
+			</h3>
+		</div>
+
+		<form th:action="@{/bienes/save}" th:object="${bien}" method="post">
+
+			<div class="row">
+
+				<input type="hidden" th:field="*{id}" /> <input type="hidden"
+					th:field="*{detalle.id}" />
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="alta">Alta Nueva</label> <input type="text"
+							th:field="*{alta}" id="alta" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="anterior">Alta Anterior</label> <input type="text"
+							th:field="*{anterior}" id="anterior" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="serie">Serie</label> <input type="text"
+							th:field="*{serie}" id="serie" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="descripcion">Descripción</label> <input type="text"
+							th:field="*{descripcion}" id="descripcion" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="costo">Costo</label> <input type="text"
+							th:field="*{costo}" id="costo" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="vida_util">Vida Util</label> <select
+							th:field="*{vida_util}" id="vida_util" class="form-control">
+							<option th:value="2" th:text="2"></option>
+							<option th:value="5" th:text="5"></option>
+							<option th:value="10" th:text="10"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="depreciacion">Depreciación</label> <select
+							th:field="*{depreciacion}" id="depreciacion" class="form-control">
+							<option th:value="2" th:text="2"></option>
+							<option th:value="5" th:text="5"></option>
+							<option th:value="10" th:text="10"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="garantia">Fin de Garantía</label> <input type="text"
+							th:field="*{garantia}" id="garantia" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="color">Color</label> <input type="text"
+							th:field="*{color}" id="color" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="material">Materia</label> <input type="text"
+							th:field="*{material}" id="material" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+			</div>
+			<!-- Para la entidad Detalle -->
+			<div class="page-header">
+				<h3 class="blog-title">
+					<span class="label label-success">Detalles</span>
+				</h3>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="asignado">Quien Usa</label> <select
+							th:field="*{detalle.asignado}" id="asignado" class="form-control">
+							<option th:value="Estudiante" th:text="Estudiante"></option>
+							<option th:value="Profesor" th:text="Profesor"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="marca">Marca</label> <input type="text"
+							th:field="*{detalle.marca}" id="marca" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="modelo">Modelo</label> <input type="text"
+							th:field="*{detalle.modelo}" id="modelo" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="estado">Estado</label> <select
+							th:field="*{detalle.estado}" id="estado" class="form-control">
+							<option th:value="Bueno" th:text="Bueno"></option>
+							<option th:value="Malo" th:text="Malo"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="estatus">Estatus</label> <select
+							th:field="*{detalle.estatus}" id="estatus" class="form-control">
+							<option th:value="Activo" th:text="Activo"></option>
+							<option th:value="Baja" th:text="Baja"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="tipo">Tipo</label> <select th:field="*{detalle.tipo}"
+							id="tipo" class="form-control">
+							<option th:value="MOBILIARIO" th:text="MOBILIARIO"></option>
+							<option th:value="MAQUINARIA-EQUIPO" th:text="MAQUINARIA-EQUIPO"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="guarda_almacen">Guarda Almacén</label> <input
+							type="text" th:field="*{detalle.guarda_almacen}"
+							id="guarda_almacen" class="form-control" required="required"
+							placeholder="Solo Letras"
+							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="causionado">Causionado</label> <input type="text"
+							th:field="*{detalle.causionado}" id="causionado"
+							class="form-control" required="required"
+							placeholder="Solo Letras"
+							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
+					</div>
+				</div>
+			</div>
+			<div class="btn-toolbar" role="toolbar">
+				<div class="btn-group">
+					<input type="submit" title="Guardar" value="Guardar" class="btn btn-primary" />
+				</div>
+
+				<div class="btn-group">
+					<a th:href="@{/bienes/cancel}" class="btn btn-danger" role="button"
+						title="Cancelar">Cancelar</a>
+				</div>
+			</div>
+			<br>
+		</form>
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+
+	<script>
+		$(function() {
+			$("#garantia").datepicker({
+				dateFormat : 'dd-mm-yy'
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="ISO-8859-1">
+<head th:replace="includes/menu :: head"></head>
+
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+
+	<div class="container theme-showcase" role="main">
+		<div class="row page-header">
+			<div class="col-lg-12">
+				<h2 class="text text-center">
+					<span class="label label-success">Estaciones</span>
+				</h2>
+			</div>
+		</div>
+
+		<!-- Marketing messaging -->
+		<div class="container marketing">
+
+			<div class="row">
+
+				<th:block th:each="estacion : ${estaciones}">
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+						<img class="img-rounded" th:src="@{/images/}+${estacion.imagen}"
+							alt="Generic placeholder image" width="200" height="150">
+						<h4>
+							<td th:text="${estacion.lugar}"></td>
+						</h4>
+						<h4>
+
+							<span class="label label-default"><td
+								th:text="${estacion.ubicacion}"></td></span>
+
+						</h4>
+
+						<p>
+							<a class="btn btn-sm btn-primary"
+								th:href="@{/detail(idEstacion=${estacion.id})}" role="button">Consulta
+								Detalle &raquo;</a>
+						</p>
+
+
+					</div>
+				</th:block>
+
+			</div>
+
+			<div class="page-header">
+				<h2 class="text text-center">
+					<span class="label label-success">Notificaciones</span>
+				</h2>
+			</div>
+
+			<div class="row">
+
+				<div class="col-sm-12 blog-main">
+
+					<th:block th:each="noticia : ${noticias}">
+						<div class="blog-post">
+							<h3 class="blog-post-title">
+								<td th:text="${noticia.titulo}"></td>
+							</h3>
+
+							<p class="blog-post-meta">
+								<span class="label label-danger">Publicado
+									<td th:text="${noticia.fecha}"></td>
+								</span>
+							</p>
+
+							<td th:text="${noticia.detalle}"></td>
+
+							<hr>
+						</div>
+
+					</th:block>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+
+</body>
+</html>

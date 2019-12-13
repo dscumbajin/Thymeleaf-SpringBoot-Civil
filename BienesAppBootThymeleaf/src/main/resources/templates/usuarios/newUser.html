@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/menu :: head"></head>
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+	<div class="container theme-showcase" role="main">
+
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-success">Datos del Usuario</span>
+			</h3>
+		</div>
+
+		<form th:action="@{/usuarios/saveNewUser}" th:object="${usuario}"
+			method="post">
+			<input type="hidden" th:field="*{id}" />
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="perfil">PERFIL</label> <select name="perfil"
+							id="perfil" class="form-control">
+							<option th:value="ESTANDAR" th:text="ESTANDAR">
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="nombre">Nombres</label> <input type="text"
+							th:field="*{nombre}" id="nombre" class="form-control"
+							required="required" autocomplete="off" placeholder="Solo Letras"
+							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="apellido">Apellido</label> <input type="text"
+							th:field="*{apellido}" id="apellido" class="form-control"
+							autocomplete="off" placeholder="Solo Letras"
+							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="cuenta">User Name</label> <input type="text"
+							th:field="*{cuenta}" id="cuenta" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="pwd">Password</label> <input type="password"
+							th:field="*{pwd}" id="pwd" class="form-control"
+							required="required" autocomplete="off" />
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="email">Email</label> <input type="email"
+							th:field="*{email}" id="email" class="form-control"
+							placeholder="aaaaa@uce.edu.ec" required="required"
+							autocomplete="off"
+							pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/"
+							onKeyUp="javascript:validateMail('email')" />
+					</div>
+				</div>
+
+			</div>
+
+			<div class="btn-toolbar" role="toolbar">
+				<div class="btn-group">
+					<input type="submit" title="Guardar" value="Guardar"
+						class="btn btn-primary" />
+				</div>
+
+				<div class="btn-group">
+					<a th:href="@{/usuarios/cancelNewUser}" class="btn btn-danger"
+						role="button" title="Cancelar">Cancelar</a>
+				</div>
+			</div>
+			<br>
+		</form>
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+</body>
+</html>

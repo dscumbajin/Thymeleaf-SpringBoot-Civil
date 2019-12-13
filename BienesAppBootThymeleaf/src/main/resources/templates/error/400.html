@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="ISO-8859-1">
+<head th:replace="includes/menu :: head"></head>
+
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+	<div class="container theme-showcase" role="main">
+
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h3 class="panel-title">Error 400.</h3>
+				
+			</div>
+			
+			<div class="panel-body">
+				<img class="img-rounded" th:src="@{/images/error.png" width="48" height="48"
+					class="center">
+				<h4>El requerimiento enviado por el cliente es sintácticamente
+					incorrecto!</h4>
+				<br>
+				<button class="btn btn-success" onclick="goBack()">REGRESAR</button>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+
+</body>
+</html>

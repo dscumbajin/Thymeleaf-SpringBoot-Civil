@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="includes/menu :: head"></head>
+
+<body>
+	<header th:replace="includes/menu :: header "></header>
+	<div class="container theme-showcase" role="main">
+
+		<!-- Marketing messaging -->
+		<div class="container marketing">
+			<div class="page-header">
+				<h2>
+					<td th:text="${estacion.lugar}"></td>
+				</h2>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<p class="text-center">
+						<img class="img-rounded" th:src="@{/images/}+${estacion.imagen}"
+							alt="Generic placeholder image" width="300" height="200">
+
+					</p>
+				</div>
+				<div class="col-sm-8">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">DETALLES</h3>
+						</div>
+						<div class="panel-body">
+							<p>
+								Ubicación:
+								<td th:text="${estacion.ubicacion}"></td> <br> Lugar :
+								<td th:text="${estacion.lugar}"></td> <br> Total Bienes:
+								<td th:text="${numEquipo}"></td>
+
+							</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="btn-toolbar" role="toolbar">
+
+				<div class="btn-group">
+					<a th:href="@{/downloadTotalDetalle?type=pdf}"
+						class="btn btn-outline-dark" role="button" title="Reporte en Pdf">Reportes
+						Pdf <i class="fa fa-file-pdf-o"
+						style="font-size: 24px; color: red"></i>
+					</a>
+				</div>
+				<div class="btn-group">
+					<a th:href="@{/downloadTotalDetalle?type=excel}"
+						class="btn btn-outline-dark" role="button"
+						title="Reporte en Excel">Reportes Excel <i
+						class="fa fa-file-excel-o" style="font-size: 24px; color: green;"></i>
+					</a>
+				</div>
+
+				<div class="btn-group">
+					<a th:href="@{/personalizado}" class="btn btn-danger" role="button"
+						title="Reporte por Periodo">Reporte por Periodo</a>
+				</div>
+			</div>
+			<br>
+
+		</div>
+		<!-- /.container -->
+
+	</div>
+	<!-- /container -->
+
+	<div id="main-container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<form class="form-inline" th:action="@{/search}" method="POST">
+					<div class="form-group">
+						<input type="text" id="searchTerm" name="campo"
+							placeholder="Lector Alta Nueva" onkeyup="doSearch()"
+							required="required">
+					</div>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+					<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+				</form>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table id="datos"
+						class=" table-rwd  table-hover table-striped table-bordered">
+						<thead class="thead-inverse thead-dark">
+
+							<tr>
+								<th>Persona Usa</th>
+								<th>Alta Nueva</th>
+								<th>Alta Anteriror</th>
+								<th>Descripcion</th>
+								<th>Marca</th>
+								<th>Modelo</th>
+								<th>Serie</th>
+								<th>Guarda Almacen</th>
+								<th>Causionado</th>
+								<th>Lugar</th>
+								<th>Ubicación</th>
+								<th>Registro</th>
+								<th>Actualización</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bien_estacion: ${bienes_Estaciones}">
+								<td th:text="${bien_estacion.bien.detalle.asignado}"></td>
+								<td th:text="${bien_estacion.bien.alta}"></td>
+								<td th:text="${bien_estacion.bien.anterior}"></td>
+								<td th:text="${bien_estacion.bien.descripcion}"></td>
+								<td th:text="${bien_estacion.bien.detalle.marca}"></td>
+								<td th:text="${bien_estacion.bien.detalle.modelo}"></td>
+								<td th:text="${bien_estacion.bien.serie}"></td>
+								<td th:text="${bien_estacion.bien.detalle.guarda_almacen}"></td>
+								<td th:text="${bien_estacion.bien.detalle.causionado}"></td>
+								<td th:text="${bien_estacion.estacion.lugar}"></td>
+								<td th:text="${bien_estacion.estacion.ubicacion}"></td>
+								<td th:text="${#dates.format(bien_estacion.registro, 'dd-MMM-yyyy')}"></td>
+								<td th:text="${#dates.format(bien_estacion.actualizacion, 'dd-MMM-yyyy')}"></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+
+</body>
+</html>

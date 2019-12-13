@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/menu :: head"></head>
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+	<div class="container theme-showcase" role="main">
+		<div class="card bg-dark">
+			<h3 class="blog-title">
+				<span class="label label-success">Datos Biens - Estación</span>
+			</h3>
+			<br>
+
+			<div class="card-body">
+				<form th:action="@{/asignaciones/save}"
+					th:object="${bienes_Estaciones}" method="post">
+					<div class=" row">
+						<input type="hidden" th:field="*{id}" />
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="id_bien" class="control-label">Alta Nueva
+									del Bien</label> <input type="text" th:field="*{bien.alta}"
+									id="id_bien" readonly="readonly" class="form-control" /> <input
+									type="hidden" th:field="*{bien.id}" />
+								<!--   <select
+									name="bien.id">
+									<option th:each="Item : ${bienes}" th:value="${Item.id}"
+										th:text="${Item.alta}" th:field="*{id}" class="form-control"
+										th:disabled="disabled" th:selected="false" />
+
+								</select> -->
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="id_estacion" class="control-label">Lugar</label> <select
+									name="estacion.id" class="form-control">
+									<option th:each="Item : ${estaciones}" th:value="${Item.id}"
+										th:text="${Item.lugar}" th:field="*{estacion.id}"
+										th:selected="false" />
+								</select>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="registro" class="control-label">Fecha
+									registro: </label> <input type="text" th:field="*{registro}"
+									id="registro" readonly="readonly" class="form-control" />
+							</div>
+						</div>
+
+
+					</div>
+
+
+					<div class="btn-toolbar" role="toolbar">
+						<div class="btn-group">
+							<input type="submit" title="Guardar" value="Guardar"
+								class="btn btn-primary" />
+						</div>
+
+						<div class="btn-group">
+							<a th:href="@{/asignaciones/cancel}" class="btn btn-danger"
+								role="button" title="Cancelar">Cancelar</a>
+						</div>
+					</div>
+					<br>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+
+</body>
+</html>

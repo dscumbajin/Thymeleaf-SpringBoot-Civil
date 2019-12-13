@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/menu :: head"></head>
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+	<div class="container theme-showcase" role="main">
+		<div class="card bg-dark">
+			<h3 class="blog-title">
+				<span class="label label-success">Datos de la Estación</span>
+			</h3>
+
+			<br>
+
+			<form th:action="@{/estaciones/save}" th:object="${estacion}"
+				method="post" enctype="multipart/form-data">
+
+				<div class="row">
+					<input type="hidden" th:field="*{id}" />
+
+
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="ubicacion">Ubicación</label> <input type="text"
+								class="form-control" th:field="*{ubicacion}" name="ubicacion"
+								required="required" autocomplete="off">
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="lugar">Lugar</label> <input type="text"
+								th:field="*{lugar}" name="lugar" required="required"
+								autocomplete="off" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="imagen">Imagen</label> <input type="file"
+								id="archivoImagen" name="archivoImagen" /> <input type="hidden"
+								th:field="*{imagen}" />
+							<p class="help-block">Imagen de estación</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="btn-toolbar" role="toolbar">
+					<div class="btn-group">
+						<input type="submit" title="Guardar" value="Guardar" class="btn btn-primary" />
+					</div>
+
+					<div class="btn-group">
+						<a th:href="@{/estaciones/cancel}" class="btn btn-danger"
+							role="button" title="Cancelar">Cancelar</a>
+					</div>
+				</div>
+				<br>
+			</form>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+</body>
+</html>

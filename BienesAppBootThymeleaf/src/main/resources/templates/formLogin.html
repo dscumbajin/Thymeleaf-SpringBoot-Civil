@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="includes/menu :: head"></head>
+
+<body>
+	<header th:replace="includes/menu :: header "></header>
+	<div class="container theme-showcase " role="main">
+
+		<hr class="featurette-divider">
+
+		<form class="form-signin" th:action="@{/login}" method="post">
+
+
+
+			<h3 class="form-signin-heading">Control de Bienes Site |
+				Administracion</h3>
+			<label for="username" class="sr-only"> Usuario</label> <input
+				type="text" id="username" name="username" class="form-control"
+				placeholder="Usuario" required autofocus autocomplete="off">
+			<br> <label for="password" class="sr-only">Contraseña</label> <input
+				type="password" id="password" name="password" class="form-control"
+				placeholder="Password" required autocomplete="off"> <input
+				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<button title="Entrar" class="btn btn-lg btn-primary btn-block"
+				type="submit">Entrar</button>
+
+		</form>
+	</div>
+	<!-- /container -->
+	<br>
+	<br>
+	<div class="container theme-showcase">
+		<div class="centrar col-12 forgot">
+
+			<p>
+				<a title="Crear Usuario - Registrarse"
+					th:href="@{/usuarios/createNewUser}">Crear Usuario -
+					Registrarse</a>
+			<p>
+				<a title="Olvidaste tu Contraseña ?"
+					th:href="@{/usuarios/changePassword}">Olvidaste tu Contraseña ?</a>
+		</div>
+
+	</div>
+	<!-- /container -->
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+</body>
+</html>

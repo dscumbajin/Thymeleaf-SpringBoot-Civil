@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="includes/menu :: head"></head>
+
+<body>
+	<header th:replace="includes/menu :: header "></header>
+
+	<div class="container theme-showcase" role="main">
+
+
+		<h3>Listado de Bienes</h3>
+
+		<div class="btn-toolbar" role="toolbar">
+
+			<div class="btn-group">
+				<a th:href="@{/bienes/create}" class="btn btn-primary" role="button"
+					title="Nuevo Bien"><i class="fa fa-plus" aria-hidden="true"></i>
+					Nueva</a>
+			</div>
+
+			<div class="btn-group">
+				<a th:href="@{/bienes/downloadTotal?type=pdf}"
+					class="btn btn-outline-dark" role="button" title="Reporte en Pdf">Reportes
+					Pdf <i class="fa fa-file-pdf-o" style="font-size: 24px; color: red"></i>
+				</a>
+			</div>
+			<div class="btn-group">
+				<a th:href="@{/bienes/downloadTotal?type=excel}"
+					class="btn btn-outline-dark" role="button" title="Reporte en Excel">Reportes
+					Excel <i class="fa fa-file-excel-o"
+					style="font-size: 24px; color: green;"></i>
+				</a>
+			</div>
+
+			<div class="btn-group">
+				<a th:href="@{/bienes/personalizado}" class="btn btn-danger"
+					role="button" title="Reporte por Periodo">Reporte por Periodo</a>
+			</div>
+		</div>
+		<br>
+	</div>
+	<!-- /container -->
+	<div id="main-container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<form class="form-inline" th:action="@{/bienes/search}"
+					method="POST">
+					<div class="form-group">
+						<input type="text" id="searchTerm" name="campo"
+							placeholder="Lector Alta Nueva" onkeyup="doSearch()"
+							required="required">
+					</div>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+					<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+				</form>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table id="datos"
+						class=" table-rwd  table-hover table-striped table-bordered">
+						<thead class="thead-inverse thead-dark">
+
+							<tr>
+								<th>Alta Nueva</th>
+								<th>Alta Anterior</th>
+								<th>Serie</th>
+								<th>Descripción</th>
+								<th>Fecha de Ingreso</th>
+								<th>Costo</th>
+								<th>Vida Util</th>
+								<th>Depreciación</th>
+								<th>Fecha Garantía</th>
+								<th>Color</th>
+								<th>Material</th>
+								<th>Asignado</th>
+								<th>Causionado</th>
+								<th>Estado</th>
+								<th>Estatus</th>
+								<th>Guarda Almacen</th>
+								<th>Marca</th>
+								<th>Modelo</th>
+								<th>Tipo</th>
+								<th>Opciones</th>
+
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr th:each="bien: ${bienes}">
+								<td th:text="${bien.alta}"></td>
+								<td th:text="${bien.anterior }"></td>
+								<td th:text="${bien.serie}"></td>
+								<td th:text="${bien.descripcion}"></td>
+								<td th:text="${#dates.format(bien.fecha_ingreso, 'dd-MMM-yyyy')}"></td>
+								<td th:text="${bien.costo }"></td>
+								<td th:text="${bien.vida_util }"></td>
+								<td th:text="${bien.depreciacion }"></td>
+								<td th:text="${#dates.format(bien.garantia, 'dd-MMM-yyyy')}"></td>
+								<td th:text="${bien.color}"></td>
+								<td th:text="${bien.material}"></td>
+								<td th:text="${bien.detalle.asignado}"></td>
+								<td th:text="${bien.detalle.causionado}"></td>
+								<td><span th:if="${bien.detalle.estado == 'Bueno'}"
+									class="label label-success"> Bueno </span> <span
+									th:unless="${bien.detalle.estado == 'Bueno'}"
+									class="label label-danger">Malo</span></td>
+								<td><span th:if="${bien.detalle.estatus == 'Activo'}"
+									class="label label-success"> Activo </span> <span
+									th:unless="${bien.detalle.estatus == 'Activo'}"
+									class="label label-danger">Baja</span></td>
+								<td th:text="${bien.detalle.guarda_almacen}"></td>
+								<td th:text="${bien.detalle.marca}"></td>
+								<td th:text="${bien.detalle.modelo}"></td>
+								<td th:text="${bien.detalle.tipo}"></td>
+								<td><a class="btn btn-outline-primary btn-sm"
+									th:href="@{/bienes/edit/} + ${bien.id}" role="button"
+									title="Editar"><i class="fa fa-pencil-square"></i></a> <a
+									class="btn  btn-outline-danger btn-sm"
+									th:href="@{/bienes/delete/} + ${bien.id}" role="button"
+									title="Eliminar"
+									onclick="return confirm('Estás seguro que quieres eliminar?');"><i
+										class="fa fa-trash-o"></i></a></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+</body>
+</html>

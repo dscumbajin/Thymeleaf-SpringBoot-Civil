@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="includes/menu :: head"></head>
+
+<body>
+	<header th:replace="includes/menu :: header "></header>
+	<div class="container theme-showcase" role="main">
+
+		<h3>Listado de Bienes</h3>
+
+		<div class="btn-toolbar" role="toolbar">
+			<div class="btn-group">
+				<a th:href="@{/bienes/periodo?type=pdf}"
+					class="btn btn-outline-dark" role="button" title="Reporte en Pdf">Reportes
+					Pdf <i class="fa fa-file-pdf-o" style="font-size: 24px; color: red"></i>
+				</a>
+			</div>
+			<div class="btn-group">
+				<a th:href="@{/bienes/periodo?type=excel}"
+					class="btn btn-outline-dark" role="button" title="Reporte en Excel">Reportes
+					Excel <i class="fa fa-file-excel-o"
+					style="font-size: 24px; color: green;"></i>
+				</a>
+			</div>
+
+			<div class="btn-group">
+				<a th:href="@{/bienes/cancel}" class="btn btn-danger" role="button"
+					title="Cancelar">Cancelar</a>
+			</div>
+		</div>
+		<br>
+
+	</div>
+	<!-- /container -->
+	<div id="main-container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<form class="form-inline" th:action="@{/bienes/buscar}"
+					method="POST">
+
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="startDate"
+							name="startDate" placeholder="Fecha Inicio Registro (dd-mm-yyyy)"
+							required="required" autocomplete="off">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="endDate"
+							name="endDate" placeholder="Fecha Fin Registro (dd-mm-yyyy)"
+							required="required" autocomplete="off">
+					</div>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+					<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+				</form>
+
+				<br> <label>Buscar:</label> <input id="searchTerm" type="text"
+					onkeyup="doSearch()" />
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table id="datos"
+						class=" table-rwd  table-hover table-striped table-bordered">
+						<thead class="thead-inverse thead-dark">
+
+							<tr>
+								<th>Alta Nueva</th>
+								<th>Alta Anterior</th>
+								<th>Serie</th>
+								<th>Descripción</th>
+								<th>Fecha de Ingreso</th>
+								<th>Costo</th>
+								<th>Vida Util</th>
+								<th>Depreciación</th>
+								<th>Fecha Garantía</th>
+								<th>Color</th>
+								<th>Material</th>
+								<th>Asignado</th>
+								<th>Causionado</th>
+								<th>Estado</th>
+								<th>Estatus</th>
+								<th>Guarda Almacen</th>
+								<th>Marca</th>
+								<th>Modelo</th>
+								<th>Tipo</th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr th:each="bien: ${bienes}">
+								<td th:text="${bien.alta}"></a></td>
+								<td th:text="${bien.anterior }"></td>
+								<td th:text="${bien.serie}"></td>
+								<td th:text="${bien.descripcion}"></td>
+								<td th:text="${#dates.format(bien.fecha_ingreso, 'dd-MMM-yyyy')}"></td>
+								<td th:text="${bien.costo }"></td>
+								<td th:text="${bien.vida_util }"></td>
+								<td th:text="${bien.depreciacion }"></td>
+								<td th:text="${#dates.format(bien.garantia, 'dd-MMM-yyyy')}"></td>
+								<td th:text="${bien.color}"></td>
+								<td th:text="${bien.material}"></td>
+								<td th:text="${bien.detalle.asignado}"></td>
+								<td th:text="${bien.detalle.causionado}"></td>
+								<td><span th:if="${bien.detalle.estado == 'Bueno'}"
+									class="label label-success"> Bueno </span> <span
+									th:unless="${bien.detalle.estado == 'Bueno'}"
+									class="label label-danger">Malo</span></td>
+								<td><span th:if="${bien.detalle.estatus == 'Activo'}"
+									class="label label-success"> Activo </span> <span
+									th:unless="${bien.detalle.estatus == 'Activo'}"
+									class="label label-danger">Baja</span></td>
+								<td th:text="${bien.detalle.guarda_almacen}"></td>
+								<td th:text="${bien.detalle.marca}"></td>
+								<td th:text="${bien.detalle.modelo}"></td>
+								<td th:text="${bien.detalle.tipo}"></td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<footer th:replace="includes/footer :: footer"></footer>
+
+	<script>
+		$(function() {
+			$("#startDate").datepicker({
+				dateFormat : 'dd-mm-yy'
+			});
+		});
+	</script>
+
+	<script>
+		$(function() {
+			$("#endDate").datepicker({
+				dateFormat : 'dd-mm-yy'
+			});
+		});
+	</script>
+</body>
+</html>
