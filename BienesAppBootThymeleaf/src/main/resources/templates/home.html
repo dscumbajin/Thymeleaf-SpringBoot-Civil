@@ -26,13 +26,10 @@
 
 						<img class="img-rounded" th:src="@{/images/}+${estacion.imagen}"
 							alt="Generic placeholder image" width="200" height="150">
-						<h4>
-							<td th:text="${estacion.lugar}"></td>
-						</h4>
+						<h4 th:text="${estacion.lugar}"></h4>
 						<h4>
 
-							<span class="label label-default"><td
-								th:text="${estacion.ubicacion}"></td></span>
+							<span class="label label-default" th:text="${estacion.ubicacion}"></span>
 
 						</h4>
 
@@ -60,17 +57,14 @@
 
 					<th:block th:each="noticia : ${noticias}">
 						<div class="blog-post">
-							<h3 class="blog-post-title">
-								<td th:text="${noticia.titulo}"></td>
-							</h3>
+							<h3 class="blog-post-title" th:text="${noticia.titulo}"></h3>
 
 							<p class="blog-post-meta">
-								<span class="label label-danger">Publicado
-									<td th:text="${noticia.fecha}"></td>
-								</span>
+								<span class="label label-danger">Publicado:</span><span
+									class="label label-danger" th:text="${noticia.fecha}"> </span>
 							</p>
 
-							<td th:text="${noticia.detalle}"></td>
+							<h5 th:text="${noticia.detalle}"></h5>
 
 							<hr>
 						</div>
