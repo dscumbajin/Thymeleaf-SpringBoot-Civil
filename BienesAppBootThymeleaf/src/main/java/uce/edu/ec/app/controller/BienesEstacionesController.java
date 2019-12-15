@@ -48,7 +48,6 @@ public class BienesEstacionesController {
 
 	private String token = "";
 
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@GetMapping(value = "/index")
 	public String mostrarIndex(Model model) {
@@ -100,7 +99,6 @@ public class BienesEstacionesController {
 				System.out.println("Id bien asignado: " + idBien);
 				Bien bien = servicioBienes.buscarPorId(Integer.parseInt(idBien));
 				bien.setControl("Inactivo");
-				servicioBienes.insertar(bien);
 				bienes_Estaciones.setRegistro(bien.getFecha_ingreso());
 				bienes_Estaciones.setActualizacion(bien.getFecha_ingreso());
 
@@ -192,7 +190,7 @@ public class BienesEstacionesController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 

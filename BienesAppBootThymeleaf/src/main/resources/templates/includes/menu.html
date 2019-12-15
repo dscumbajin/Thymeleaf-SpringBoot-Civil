@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
@@ -21,7 +21,7 @@
 	<header th:fragment="header">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<sec:authorize access="isAnonymous()">
+				<!--  		<sec:authorize access="isAnonymous()">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed"
 							data-toggle="collapse" data-target="#navbar"
@@ -41,8 +41,8 @@
 									aria-hidden="true" style="color: blue"></i> Login</a></li>
 						</ul>
 					</div>
-					<!--/.nav-collapse -->
-				</sec:authorize>
+					<!--/.nav-collapse 
+				</sec:authorize>-->
 				<sec:authorize access="hasAnyAuthority('ADMINISTRADOR')">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed"
@@ -71,7 +71,7 @@
 					<!--/.nav-collapse -->
 				</sec:authorize>
 
-				<sec:authorize access="hasAnyAuthority('ESTANDAR')">
+			<!--  	<sec:authorize access="hasAnyAuthority('ESTANDAR')">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed"
 							data-toggle="collapse" data-target="#navbar"
@@ -92,8 +92,8 @@
 									Salir</a></li>
 						</ul>
 					</div>
-					<!--/.nav-collapse -->
-				</sec:authorize>
+					<!--/.nav-collapse 
+				</sec:authorize>-->
 
 			</div>
 		</nav>

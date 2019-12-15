@@ -172,11 +172,17 @@ public class BienesController {
 			}
 
 		} else {
-			serviceDetalles.insertar(bien.getDetalle());
-			serviceBienes.insertar(bien);
-			attributes.addFlashAttribute("mensaje", "El registro fue editado");
-			edicion = "";
-			return "redirect:/bienes/indexPaginate";
+			if (!(serviceBienes.exiteRegistroPorAltaAnteriorSerie(alta, anterior, serie))) {
+				serviceDetalles.insertar(bien.getDetalle());
+				serviceBienes.insertar(bien);
+				attributes.addFlashAttribute("mensaje", "El registro fue editado");
+				edicion = "";
+				return "redirect:/bienes/indexPaginate";
+			} else {
+				model.addAttribute("alerta", "Ya existe un registro con Alta Nueva: " + alta + " Alta Anterior: "
+						+ anterior + " Serie: " + serie);
+				return "bienes/formBien";
+			}
 
 		}
 
